@@ -6,7 +6,7 @@ Product.allPics = [];
 Product.container = document.getElementById('imageContainer');
 Product.pics = [document.getElementById('pic1'), document.getElementById('pic2'),document.getElementById('pic3')];
 Product.justShown = [];
-Product.tally = document.getElementById('researchLog');
+Product.tally = document.getElementById('chart');
 Product.totalClicks = 0;
 
 
@@ -83,11 +83,12 @@ function handleClick(event) {
   console.log(Product.totalClicks, 'total clicks');
   if(Product.totalClicks > 24) {
     Product.container.removeEventListener('click', handleClick);
-    showTally();
+    showTallyChart();
   }
   displayPics();
 }
-// function showTally() {
+//showTallyChart();
+// function showTallyChart() {
 //   for(var i = 0; Product.allPics.length; i++) {
 //     var liEl = document.createElement('li');
 //     liEl.textContent = Product.allPics[i].name + ' has ' + Product.allPics[i].clicks + ' votes in ' + Product.allPics[i].shown + ' views.';
@@ -98,37 +99,45 @@ function handleClick(event) {
 Product.container.addEventListener('click', handleClick);
 displayPics();
 
-var clicks = [];
-for(var i = 0; i < Product.allPics.length; i++) {
-  clicks.push(Product.allPics[i].clicks);
-}
-
-var shown = [];
-for(var j = 0; j < Product.allPics.length; j++) {
-  shown.push(Product.allPics[j].shown);
-}
-
-var itemName = [];
-for(var k = 0; k < Product.allPics.length; k++) {
-  itemName.push(Product.allPics[k].name);
-}
-var ctx = document.getElementById('chart').getContext('2d');
-
-var myBarChart = new Chart(ctx, {
-  type: 'bar',
-  data: {
-    labels: [itemName],
-    datasets: [{
-      label: 'Number of Clicks',
-      backgroundColor: 'rgb(255, 99, 132)',
-      borderColor: 'rgb(255, 99, 132)',
-      data: clicks,
-    },
-    { label: 'Times Shown',
-      data: shown,
-
-    }]
+function showTallyChart(){
+  var clicks = [];
+  var shown = [];
+  for(var i = 0; i < Product.allPics.length; i++) {
+    clicks.push(Product.allPics[i].clicks);
+    shown.push(Product.allPics[i].shown);
+    console.log(clicks[i]);
+    console.log(shown[i]);
   }
-});
-Product.tally.appendChild(ctx);
-myBarChart;
+
+  var ctx = document.getElementById('chart').getContext('2d');
+
+  var myBarChart = new Chart(ctx, {
+    type: 'bar',
+    data: {
+      labels: ['bag','banana','bathroom','boots','breakfast','bubblegum','chair','cthulhu','dog-duck','dragon','pen','pet-sweep','tauntaun','unicorn','usb','water-can','wine-glass'],
+    
+      datasets: [{
+        label: 'Number of Clicks',
+        backgroundColor: 'blue',
+        borderColor: 'rgb(255, 99, 132)',
+        data: clicks,
+      },
+      { label: 'Times Shown',
+        backgroundColor: 'red',
+        borderColor: 'rgb(255, 99, 132)',
+        data: shown,
+
+      }]
+    },
+    options: {
+      scales: {
+        yAxes: [{
+          ticks: {
+            beginAtZero: true
+          }
+        }]
+      }
+    }
+  });
+  myBarChart;
+}
