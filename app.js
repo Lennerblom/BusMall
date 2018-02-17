@@ -65,7 +65,6 @@ function displayPics() {
     Product.pics[i].id = Product.allPics[currentlyShowing[i]].name;
     Product.pics[i].src = Product.allPics[currentlyShowing[i]].filepath;
     Product.allPics[currentlyShowing[i]].shown += 1;
-    //Product.allPics[currentlyShowing[i]].clicks += 1;
     Product.justShown[i] = currentlyShowing[i];
   }
 }
@@ -81,20 +80,16 @@ function handleClick(event) {
     }
   }
   console.log(Product.totalClicks, 'total clicks');
+
+  var strProduct = JSON.stringify(Product.allPics);
+  localStorage.setItem('products', strProduct);
+
   if(Product.totalClicks > 24) {
     Product.container.removeEventListener('click', handleClick);
     showTallyChart();
   }
   displayPics();
 }
-//showTallyChart();
-// function showTallyChart() {
-//   for(var i = 0; Product.allPics.length; i++) {
-//     var liEl = document.createElement('li');
-//     liEl.textContent = Product.allPics[i].name + ' has ' + Product.allPics[i].clicks + ' votes in ' + Product.allPics[i].shown + ' views.';
-//     Product.tally.appendChild(liEl);
-//   }
-// }
 
 Product.container.addEventListener('click', handleClick);
 displayPics();
@@ -105,8 +100,6 @@ function showTallyChart(){
   for(var i = 0; i < Product.allPics.length; i++) {
     clicks.push(Product.allPics[i].clicks);
     shown.push(Product.allPics[i].shown);
-    console.log(clicks[i]);
-    console.log(shown[i]);
   }
 
   var ctx = document.getElementById('chart').getContext('2d');
@@ -115,7 +108,6 @@ function showTallyChart(){
     type: 'bar',
     data: {
       labels: ['bag','banana','bathroom','boots','breakfast','bubblegum','chair','cthulhu','dog-duck','dragon','pen','pet-sweep','tauntaun','unicorn','usb','water-can','wine-glass'],
-    
       datasets: [{
         label: 'Number of Clicks',
         backgroundColor: 'firebrick',
@@ -141,3 +133,10 @@ function showTallyChart(){
   });
   myBarChart;
 }
+(function getLocatStorage() {
+  if (localStorage.products) {
+    var strProduct = localStorage.getItem('procucts');
+    var products = JSON.parse(strProduct);
+    console.log(products);
+  }
+});
