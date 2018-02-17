@@ -118,13 +118,13 @@ function showTallyChart(){
     
       datasets: [{
         label: 'Number of Clicks',
-        backgroundColor: 'blue',
-        borderColor: 'rgb(255, 99, 132)',
+        backgroundColor: 'firebrick',
+        borderColor: '#999',
         data: clicks,
       },
       { label: 'Times Shown',
-        backgroundColor: 'red',
-        borderColor: 'rgb(255, 99, 132)',
+        backgroundColor: 'cornflowerblue',
+        borderColor: '#999',
         data: shown,
 
       }]

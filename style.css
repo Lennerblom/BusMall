@@ -1,18 +1,43 @@
+body {
+    background-color: gainsboro;
+    width: 95%;
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
+
+}
+h1 {
+    font-size: 32px;
+    background-color: rgb(22, 13, 13);
+    padding: 15px;
+    margin: 25px 20% 5px 20%;
+    text-align: center;
+    width: 57%;
+    color: lightgoldenrodyellow;
+}
+
 section {
     margin-left: 20%;
+    margin-right: 20%;
 }
 
 img {
-    width: 15%;
-    height: 15%;
-    margin: 30px 30px 30px 0px;
+    float: left;
+    width: 20%;
+    height: 20%;
+    margin: 30px 10% 10px 0px;
+    vertical-align: middle;
 }
-h1 {
-font-size: 32px;
-background-color: lightgoldenrodyellow;
-padding: 15px;
-margin: 25px 20% 25px 20%;
+section img:first-child{
+    margin: 30px 20% 10px 0px;
 }
-#researchLog {
-    margin: 25px 20% 25px 20%;
+section img:last-child {
+    float: right;
+    margin: 30px 0px 10px 0px;
+}
+h2 {
+    font-size: 24px;
+    background-color: lightgoldenrodyellow;
+    padding: 15px;
+    margin: 10px 20% 25px 20%;
+    text-align: center;
+    width: 57%;
 }
